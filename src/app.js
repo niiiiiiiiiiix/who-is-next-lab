@@ -4,13 +4,13 @@ const app = express();
 // win = who-is-next
 const win = {
   0: "GET    /",
-  1: "GET    /jumplings",
-  2: "POST   /jumplings",
-  3: "GET    /jumplings/:name",
-  4: "PUT    /jumplings/:id",
-  5: "DELETE /jumplings/:id",
+  1: "GET    /dumplings",
+  2: "POST   /dumplings",
+  3: "GET    /dumplings/:name",
+  4: "PUT    /dumplings/:id",
+  5: "DELETE /dumplings/:id",
   6: "-----------------------",
-  7: "GET    /jumplings/presenter",
+  7: "GET    /dumplings/presenter",
 };
 
 app.get("/", (req, res) => {
