@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+app.use(express.json());
 
 // win = who-is-next
 const win = {
@@ -21,6 +22,15 @@ app.get("/", (req, res) => {
 
 app.get("/dumplings", (req, res) => {
   res.status(200).json(dumplings);
+});
+
+app.post("/dumplings", (req, res) => {
+  let newDumpling = {
+    id: dumplings.length + 1,
+    name: req.body.name,
+  };
+  dumplings.push(newDumpling);
+  res.status(201).json(newDumpling);
 });
 
 module.exports = app;

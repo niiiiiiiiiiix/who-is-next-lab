@@ -22,4 +22,13 @@ describe("App", () => {
     const { body } = await request(app).get("/dumplings").expect(200);
     expect(body).toMatchObject([]);
   });
+
+  it("POST /dumplings should respond with the newly added dumpling", async () => {
+    const newDumpling = { name: "xxx" };
+    const { body } = await request(app)
+      .post("/dumplings")
+      .send(newDumpling)
+      .expect(201);
+    expect(body).toMatchObject(newDumpling);
+  });
 });
