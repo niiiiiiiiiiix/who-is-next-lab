@@ -37,4 +37,10 @@ describe("App", () => {
     const { body } = await request(app).get("/dumplings").expect(200);
     expect(body).toMatchObject([newDumpling]);
   });
+
+  it("GET /dumplings/:name should show dumpling with name specified", async () => {
+    const eDumpling = { name: "xxx" };
+    const { body } = await request(app).get("/dumplings/xxx").expect(200);
+    expect(body).toMatchObject(eDumpling);
+  });
 });

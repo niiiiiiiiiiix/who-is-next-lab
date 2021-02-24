@@ -33,4 +33,11 @@ app.post("/dumplings", (req, res) => {
   res.status(201).json(newDumpling);
 });
 
+app.get("/dumplings/:name", (req, res) => {
+  let eDumpling = dumplings.find(
+    (dumpling) => dumpling.name === req.params.name
+  );
+  res.status(200).json(eDumpling);
+});
+
 module.exports = app;
