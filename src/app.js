@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 
+// win = who-is-next
 const win = {
   0: "GET    /",
   1: "GET    /jumplings",
