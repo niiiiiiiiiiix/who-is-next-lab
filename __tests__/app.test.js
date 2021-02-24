@@ -90,4 +90,11 @@ describe("App", () => {
       },
     ]);
   });
+
+  it("GET /dumplings/presenter should respond with a random dumpling", async () => {
+    const { body } = await request(app).get("/dumplings/presenter");
+    expect(
+      body === { id: 1, name: "xxx" } || body === { id: 2, name: "yyy" }
+    ).toBeTruthy();
+  });
 });

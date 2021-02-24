@@ -58,4 +58,12 @@ app.delete("/dumplings/:id", (req, res) => {
   res.status(200).json(deleteDumpling);
 });
 
+app.get("/dumplings/presenter", (req, res) => {
+  let numberGenerator = Math.floor(
+    Math.random() * Math.floor(dumplings.length + 1)
+  );
+  // console.log(dumplings);
+  res.status(200).json(dumplings[numberGenerator]);
+});
+
 module.exports = app;
