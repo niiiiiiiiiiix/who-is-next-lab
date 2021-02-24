@@ -24,6 +24,11 @@ app.get("/dumplings", (req, res) => {
   res.status(200).json(dumplings);
 });
 
+app.get("/dumplings/presenter", (req, res) => {
+  let numberGenerator = Math.floor(Math.random() * dumplings.length - 1) + 1;
+  res.status(200).json(dumplings[numberGenerator]);
+});
+
 app.post("/dumplings", (req, res) => {
   let newDumpling = {
     id: dumplings.length + 1,
@@ -56,14 +61,6 @@ app.delete("/dumplings/:id", (req, res) => {
   dumplings.splice(index, 1);
 
   res.status(200).json(deleteDumpling);
-});
-
-app.get("/dumplings/presenter", (req, res) => {
-  let numberGenerator = Math.floor(
-    Math.random() * Math.floor(dumplings.length + 1)
-  );
-  // console.log(dumplings);
-  res.status(200).json(dumplings[numberGenerator]);
 });
 
 module.exports = app;
