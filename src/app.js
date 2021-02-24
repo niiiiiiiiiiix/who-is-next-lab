@@ -40,4 +40,12 @@ app.get("/dumplings/:name", (req, res) => {
   res.status(200).json(eDumpling);
 });
 
+app.put("/dumplings/:id", (req, res) => {
+  let changeDumpling = dumplings.find(
+    (dumpling) => dumpling.id === parseInt(req.params.id)
+  );
+  changeDumpling.name = req.body.name;
+  res.status(200).json(changeDumpling);
+});
+
 module.exports = app;

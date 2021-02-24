@@ -43,4 +43,13 @@ describe("App", () => {
     const { body } = await request(app).get("/dumplings/xxx").expect(200);
     expect(body).toMatchObject(eDumpling);
   });
+
+  it("PUT /dumplings/:id should update dumpling name", async () => {
+    const changeDumpling = { name: "xxx edited" };
+    const { body } = await request(app)
+      .put("/dumplings/1")
+      .send(changeDumpling)
+      .expect(200);
+    expect(body).toMatchObject(changeDumpling);
+  });
 });
