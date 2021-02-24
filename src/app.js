@@ -48,4 +48,14 @@ app.put("/dumplings/:id", (req, res) => {
   res.status(200).json(changeDumpling);
 });
 
+app.delete("/dumplings/:id", (req, res) => {
+  let deleteDumpling = dumplings.find(
+    (dumpling) => dumpling.id === parseInt(req.params.id)
+  );
+  let index = dumplings.indexOf(deleteDumpling);
+  dumplings.splice(index, 1);
+
+  res.status(200).json(deleteDumpling);
+});
+
 module.exports = app;

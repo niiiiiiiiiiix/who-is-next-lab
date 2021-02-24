@@ -52,4 +52,10 @@ describe("App", () => {
       .expect(200);
     expect(body).toMatchObject(changeDumpling);
   });
+
+  it("DELETE /dumplings/:id should delete entry and display the deleted entry", async () => {
+    const deleteDumpling = { name: "xxx edited" };
+    const { body } = await request(app).delete("/dumplings/1").expect(200);
+    expect(body).toMatchObject(deleteDumpling);
+  });
 });
