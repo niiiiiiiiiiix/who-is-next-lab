@@ -16,7 +16,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/presenter", (req, res) => {
-  let numberGenerator = Math.floor(Math.random() * dumplings.length - 1) + 1;
+  let numberGenerator = Math.floor(Math.random() * dumplings.length);
   res.status(200).json(dumplings[numberGenerator]);
 });
 
