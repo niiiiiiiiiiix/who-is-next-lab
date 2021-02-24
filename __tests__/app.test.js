@@ -15,6 +15,11 @@ describe("App", () => {
 
   it("GET / should respond with all possible endpoints", async () => {
     const { body } = await request(app).get("/").expect(200);
-    expect(body).toEqual(win);
+    expect(body).toMatchObject(win);
+  });
+
+  it("GET /dumplings should respond with empty array if no dumplings added, but show all dumplings if added", async () => {
+    const { body } = await request(app).get("/dumplings").expect(200);
+    expect(body).toMatchObject([]);
   });
 });

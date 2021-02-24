@@ -13,8 +13,14 @@ const win = {
   7: "GET    /dumplings/presenter",
 };
 
+const dumplings = [];
+
 app.get("/", (req, res) => {
   res.status(200).json(win);
+});
+
+app.get("/dumplings", (req, res) => {
+  res.status(200).json(dumplings);
 });
 
 module.exports = app;
