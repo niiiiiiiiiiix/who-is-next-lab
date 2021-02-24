@@ -18,7 +18,7 @@ describe("App", () => {
     expect(body).toMatchObject(win);
   });
 
-  it("GET /dumplings should respond with empty array if no dumplings added, but show all dumplings if added", async () => {
+  it("GET /dumplings should respond with empty array since no dumplings added", async () => {
     const { body } = await request(app).get("/dumplings").expect(200);
     expect(body).toMatchObject([]);
   });
@@ -30,5 +30,11 @@ describe("App", () => {
       .send(newDumpling)
       .expect(201);
     expect(body).toMatchObject(newDumpling);
+  });
+
+  it("GET /dumplings should show newly added dumpling", async () => {
+    const newDumpling = { name: "xxx" };
+    const { body } = await request(app).get("/dumplings").expect(200);
+    expect(body).toMatchObject([newDumpling]);
   });
 });
