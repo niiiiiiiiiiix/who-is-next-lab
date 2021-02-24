@@ -14,53 +14,11 @@ const win = {
   7: "GET    /dumplings/presenter",
 };
 
-const dumplings = [];
-
 app.get("/", (req, res) => {
   res.status(200).json(win);
 });
 
-app.get("/dumplings", (req, res) => {
-  res.status(200).json(dumplings);
-});
-
-app.get("/dumplings/presenter", (req, res) => {
-  let numberGenerator = Math.floor(Math.random() * dumplings.length - 1) + 1;
-  res.status(200).json(dumplings[numberGenerator]);
-});
-
-app.post("/dumplings", (req, res) => {
-  let newDumpling = {
-    id: dumplings.length + 1,
-    name: req.body.name,
-  };
-  dumplings.push(newDumpling);
-  res.status(201).json(newDumpling);
-});
-
-app.get("/dumplings/:name", (req, res) => {
-  let eDumpling = dumplings.find(
-    (dumpling) => dumpling.name === req.params.name
-  );
-  res.status(200).json(eDumpling);
-});
-
-app.put("/dumplings/:id", (req, res) => {
-  let changeDumpling = dumplings.find(
-    (dumpling) => dumpling.id === parseInt(req.params.id)
-  );
-  changeDumpling.name = req.body.name;
-  res.status(200).json(changeDumpling);
-});
-
-app.delete("/dumplings/:id", (req, res) => {
-  let deleteDumpling = dumplings.find(
-    (dumpling) => dumpling.id === parseInt(req.params.id)
-  );
-  let index = dumplings.indexOf(deleteDumpling);
-  dumplings.splice(index, 1);
-
-  res.status(200).json(deleteDumpling);
-});
+const dumplingsRouter = require("./routes/dumplings.routes");
+app.use("/dumplings", dumplingsRouter);
 
 module.exports = app;

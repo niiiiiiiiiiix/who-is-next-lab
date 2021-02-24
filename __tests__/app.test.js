@@ -94,5 +94,6 @@ describe("App", () => {
   it("GET /dumplings/presenter should respond with a random dumpling", async () => {
     const { body } = await request(app).get("/dumplings/presenter");
     expect(Object.keys(body).length).toEqual(2);
+    //toHaveProperty
   });
 });
