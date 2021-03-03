@@ -76,6 +76,7 @@ describe("dumplings", () => {
   describe("PUT /dumplings/:id", () => {
     it("should modify dumpling if fields are valid", async () => {
       const dumpling = await Dumpling.findOne({ name: "Prawn" });
+      console.log(dumpling);
       const { body } = await request(app)
         .put(`/dumplings/${dumpling.id}`)
         .send({ name: "Tiger Prawn" })
@@ -89,12 +90,11 @@ describe("dumplings", () => {
 
   describe("DELETE /dumplings/:id", () => {
     it("should delete dumpling if exist", async () => {
-      const dumpling = await Dumpling.findOne({ name: "Tiger Prawn" });
-      console.log(dumpling);
+      const dumpling = await Dumpling.findOne({ name: "Prawn" });
       const { body } = await request(app)
         .delete(`/dumplings/${dumpling.id}`)
         .expect(200);
-      expect(body).toBe({ name: "Tiger Prawn" });
+      expect(body).toMatchObject({ name: "Prawn" });
     });
     // it("should throw an error if dumpling does not exist", async () => {});
   });
