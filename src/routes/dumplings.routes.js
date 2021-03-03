@@ -5,6 +5,7 @@ const router = express.Router();
 const ctrl = require("../controllers/dumplings.controller");
 const jsonContent = require("../middleware/requireJSONcontent");
 const requireName = require("../middleware/requireName");
+// const requireDumpling = require("../middleware/requireDumpling");
 
 // param for dumpling id
 // router.param("id", (req, res, next, id) => {
@@ -45,8 +46,18 @@ router.put("/:id", [jsonContent, requireName], async (req, res, next) => {
 });
 
 router.delete("/:id", async (req, res, next) => {
-  const dumpling = await ctrl.deleteById(req.params.id, next);
-  res.status(200).json(dumpling);
+  try {
+    const dumpling = await ctrl.deleteById(req.params.id, next);
+    if (dumpling === null) {
+      const error = new Error("Dumpling does not exist");
+      error.statusCode = 400;
+      next(error);
+    } else {
+      res.status(200).json(dumpling);
+    }
+  } catch (error) {
+    next(error);
+  }
 });
 
 module.exports = router;

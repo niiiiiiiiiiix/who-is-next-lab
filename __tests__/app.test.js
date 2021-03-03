@@ -108,6 +108,13 @@ describe("dumplings", () => {
         .expect(200);
       expect(body).toMatchObject({ name: "Prawn" });
     });
-    // it("should throw an error if dumpling does not exist", async () => {});
+
+    it("should throw an error if dumpling does not exist", async () => {
+      // const dumpling = await Dumpling.findOne({ name: "notDumpling" }); // returns null
+      const response = await request(app).delete(
+        `/dumplings/603f572adeadad44d8ea23b0`
+      );
+      expect(response.status).toBe(400);
+    });
   });
 });
