@@ -1,3 +1,5 @@
+require("./utils/db");
+
 const app = require("./app");
 
 const PORT = 3001;
