@@ -33,10 +33,10 @@ router.post("/", async (req, res, next) => {
   res.status(201).json(dumplings);
 });
 
-// router.put("/:id", (req, res) => {
-//   req.dumpling.name = req.body.name;
-//   res.status(200).json(req.dumpling);
-// });
+router.put("/:id", async (req, res, next) => {
+  const dumpling = await ctrl.updateById(req.params.id, req.body, next);
+  res.status(200).json(dumpling);
+});
 
 // router.delete("/:id", (req, res) => {
 //   let index = dumplings.indexOf(req.dumpling);

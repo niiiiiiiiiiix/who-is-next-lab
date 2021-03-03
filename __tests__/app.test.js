@@ -73,27 +73,19 @@ describe("dumplings", () => {
     });
   });
 
-  // // describe("GET /dumplings", () => {
-  // //   it("should show newly added dumpling", async () => {
-  // //     const newDumpling = { name: "xxx" };
-  // //     const { body } = await request(app).get("/dumplings").expect(200);
-  // //     expect(body).toMatchObject([newDumpling]);
-  // //   });
-  // // });
+  describe("PUT /dumplings/:id", () => {
+    it("should modify dumpling if fields are valid", async () => {
+      const dumpling = await Dumpling.findOne({ name: "Prawn" });
+      const { body } = await request(app)
+        .put(`/dumplings/${dumpling.id}`)
+        .send({ name: "Tiger Prawn" })
+        .expect(200);
+      expect(body).toMatchObject({ name: "Tiger Prawn" });
+    });
 
-  // describe("PUT /dumplings/:id", () => {
-  //   it("should modify dumpling if fields are valid", async () => {
-  //     const changeDumpling = { name: "xxx edited" };
-  //     const { body } = await request(app)
-  //       .put("/dumplings/1")
-  //       .send(changeDumpling)
-  //       .expect(200);
-  //     expect(body).toMatchObject(changeDumpling);
-  //   });
-
-  //   it("should throw error if name is empty", async () => {});
-  //   it("should throw error if request body is not json ", async () => {});
-  // });
+    // it("should throw error if name is empty", async () => {});
+    // it("should throw error if request body is not json ", async () => {});
+  });
 
   // describe("DELETE /dumplings/:id", () => {
   //   it("should delete dumpling if exist", async () => {
