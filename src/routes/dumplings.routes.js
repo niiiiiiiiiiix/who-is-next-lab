@@ -3,6 +3,8 @@ const router = express.Router();
 
 // const Dumpling = require("../models/dumpling.model");
 const ctrl = require("../controllers/dumplings.controller");
+const jsonContent = require("../middleware/requireJSONcontent");
+const requireName = require("../middleware/requireName");
 
 // param for dumpling id
 // router.param("id", (req, res, next, id) => {
@@ -33,16 +35,17 @@ router.post("/", async (req, res, next) => {
   res.status(201).json(dumplings);
 });
 
-router.put("/:id", async (req, res, next) => {
-  const dumpling = await ctrl.updateById(req.params.id, req.body, next);
-  res.status(200).json(dumpling);
+router.put("/:id", [jsonContent, requireName], async (req, res, next) => {
+  try {
+    const dumpling = await ctrl.updateById(req.params.id, req.body, next);
+    res.status(200).json(dumpling);
+  } catch (error) {
+    next(error);
+  }
 });
 
 router.delete("/:id", async (req, res, next) => {
   const dumpling = await ctrl.deleteById(req.params.id, next);
-  // let index = dumplings.indexOf(req.dumpling);
-  // dumplings.splice(index, 1);
-
   res.status(200).json(dumpling);
 });
 

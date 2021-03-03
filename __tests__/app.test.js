@@ -76,7 +76,6 @@ describe("dumplings", () => {
   describe("PUT /dumplings/:id", () => {
     it("should modify dumpling if fields are valid", async () => {
       const dumpling = await Dumpling.findOne({ name: "Prawn" });
-      console.log(dumpling);
       const { body } = await request(app)
         .put(`/dumplings/${dumpling.id}`)
         .send({ name: "Tiger Prawn" })
@@ -84,8 +83,21 @@ describe("dumplings", () => {
       expect(body).toMatchObject({ name: "Tiger Prawn" });
     });
 
-    // it("should throw error if name is empty", async () => {});
-    // it("should throw error if request body is not json ", async () => {});
+    it("should throw error if name is empty", async () => {
+      const dumpling = await Dumpling.findOne({ name: "Prawn" });
+      const response = await request(app)
+        .put(`/dumplings/${dumpling.id}`)
+        .send({ name: "" });
+      expect(response.status).toBe(400);
+    });
+
+    it("should throw error if request body is not json ", async () => {
+      const dumpling = await Dumpling.findOne({ name: "Prawn" });
+      const response = await request(app)
+        .put(`/dumplings/${dumpling.id}`)
+        .send("notJSON");
+      expect(response.status).toBe(400);
+    });
   });
 
   describe("DELETE /dumplings/:id", () => {
