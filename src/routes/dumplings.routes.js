@@ -25,10 +25,6 @@ router.get("/presenter", async (req, res, next) => {
 
 router.get("/:name", async (req, res, next) => {
   const dumplings = await ctrl.findOneDumpling(req.params.name, next);
-  console.log(dumplings);
-  // let eDumpling = dumplings.find(
-  //   (dumpling) => dumpling.name === req.params.name
-  // );
   res.status(200).json(dumplings);
 });
 
