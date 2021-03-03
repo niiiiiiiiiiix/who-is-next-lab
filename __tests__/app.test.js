@@ -87,44 +87,15 @@ describe("dumplings", () => {
     // it("should throw error if request body is not json ", async () => {});
   });
 
-  // describe("DELETE /dumplings/:id", () => {
-  //   it("should delete dumpling if exist", async () => {
-  //     const deleteDumpling = { name: "xxx edited" };
-  //     const { body } = await request(app).delete("/dumplings/1").expect(200);
-  //     expect(body).toMatchObject(deleteDumpling);
-  //   });
-  //   it("should throw an error if dumpling does not exist", async () => {});
-  // });
-
-  // // it("POST /dumplings should respond with the one newly added dumpling", async () => {
-  // //   const newDumpling1 = { name: "xxx" };
-  // //   const { body } = await request(app)
-  // //     .post("/dumplings")
-  // //     .send(newDumpling1)
-  // //     .expect(201);
-  // //   expect(body).toMatchObject(newDumpling1);
-  // // });
-
-  // // it("POST /dumplings should respond with the second newly added dumpling", async () => {
-  // //   const newDumpling2 = { name: "yyy" };
-  // //   const { body } = await request(app)
-  // //     .post("/dumplings")
-  // //     .send(newDumpling2)
-  // //     .expect(201);
-  // //   expect(body).toMatchObject(newDumpling2);
-  // // });
-
-  // // it("GET /dumplings should now respond with an array of two objects", async () => {
-  // //   const { body } = await request(app).get("/dumplings");
-  // //   expect(body).toEqual([
-  // //     {
-  // //       id: 1,
-  // //       name: "xxx",
-  // //     },
-  // //     {
-  // //       id: 2,
-  // //       name: "yyy",
-  // //     },
-  // //   ]);
-  // // });
+  describe("DELETE /dumplings/:id", () => {
+    it("should delete dumpling if exist", async () => {
+      const dumpling = await Dumpling.findOne({ name: "Tiger Prawn" });
+      console.log(dumpling);
+      const { body } = await request(app)
+        .delete(`/dumplings/${dumpling.id}`)
+        .expect(200);
+      expect(body).toBe({ name: "Tiger Prawn" });
+    });
+    // it("should throw an error if dumpling does not exist", async () => {});
+  });
 });

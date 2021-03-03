@@ -38,11 +38,12 @@ router.put("/:id", async (req, res, next) => {
   res.status(200).json(dumpling);
 });
 
-// router.delete("/:id", (req, res) => {
-//   let index = dumplings.indexOf(req.dumpling);
-//   dumplings.splice(index, 1);
+router.delete("/:id", async (req, res, next) => {
+  const dumpling = await ctrl.deleteById(req.params.id, next);
+  // let index = dumplings.indexOf(req.dumpling);
+  // dumplings.splice(index, 1);
 
-//   res.status(200).json(req.dumpling);
-// });
+  res.status(200).json(dumpling);
+});
 
 module.exports = router;
