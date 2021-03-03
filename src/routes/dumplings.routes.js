@@ -28,14 +28,10 @@ router.get("/:name", async (req, res, next) => {
   res.status(200).json(dumplings);
 });
 
-// router.post("/", (req, res) => {
-//   let newDumpling = {
-//     id: dumplings.length + 1,
-//     name: req.body.name,
-//   };
-//   dumplings.push(newDumpling);
-//   res.status(201).json(newDumpling);
-// });
+router.post("/", async (req, res, next) => {
+  const dumplings = await ctrl.createOneDumpling(req.body, next);
+  res.status(201).json(dumplings);
+});
 
 // router.put("/:id", (req, res) => {
 //   req.dumpling.name = req.body.name;

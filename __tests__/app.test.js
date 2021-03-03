@@ -62,16 +62,16 @@ describe("dumplings", () => {
     });
   });
 
-  // describe("POST /dumplings", () => {
-  //   it("should respond with the newly added dumpling", async () => {
-  //     const newDumpling = { name: "xxx" };
-  //     const { body } = await request(app)
-  //       .post("/dumplings")
-  //       .send(newDumpling)
-  //       .expect(201);
-  //     expect(body).toMatchObject(newDumpling);
-  //   });
-  // });
+  describe("POST /dumplings", () => {
+    it("should respond with the newly added dumpling", async () => {
+      const newDumpling = { name: "Fish" };
+      const { body } = await request(app)
+        .post("/dumplings")
+        .send(newDumpling)
+        .expect(201);
+      expect(body).toMatchObject(newDumpling);
+    });
+  });
 
   // // describe("GET /dumplings", () => {
   // //   it("should show newly added dumpling", async () => {
