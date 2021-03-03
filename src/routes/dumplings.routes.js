@@ -20,8 +20,16 @@ router.get("/", async (req, res, next) => {
 router.get("/presenter", async (req, res, next) => {
   const dumplings = await ctrl.getAllDumplings(next);
   let numberGenerator = Math.floor(Math.random() * dumplings.length);
-  console.log(dumplings[numberGenerator]);
   res.status(200).json(dumplings[numberGenerator]);
+});
+
+router.get("/:name", async (req, res, next) => {
+  const dumplings = await ctrl.findOneDumpling(req.params.name, next);
+  console.log(dumplings);
+  // let eDumpling = dumplings.find(
+  //   (dumpling) => dumpling.name === req.params.name
+  // );
+  res.status(200).json(dumplings);
 });
 
 // router.post("/", (req, res) => {
@@ -31,13 +39,6 @@ router.get("/presenter", async (req, res, next) => {
 //   };
 //   dumplings.push(newDumpling);
 //   res.status(201).json(newDumpling);
-// });
-
-// router.get("/:name", (req, res) => {
-//   let eDumpling = dumplings.find(
-//     (dumpling) => dumpling.name === req.params.name
-//   );
-//   res.status(200).json(eDumpling);
 // });
 
 // router.put("/:id", (req, res) => {

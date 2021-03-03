@@ -19,6 +19,15 @@ const getAllDumplings = async (next) => {
   }
 };
 
+const findOneDumpling = async (name, next) => {
+  try {
+    const dumpling = await Dumpling.findOne({ name: name });
+    return dumpling;
+  } catch (err) {
+    next(err);
+  }
+};
+
 const findById = async (id, next) => {
   try {
     const dumpling = await Dumpling.findById(id);
@@ -52,6 +61,7 @@ const deleteById = async (id, next) => {
 module.exports = {
   createOneDumpling,
   getAllDumplings,
+  findOneDumpling,
   findById,
   updateById,
   deleteById,

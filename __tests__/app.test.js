@@ -52,17 +52,15 @@ describe("dumplings", () => {
         .get("/dumplings/presenter")
         .expect(200);
       expect(Object.keys(body).length).toEqual(3);
-      //toHaveProperty
     });
   });
 
-  // describe("GET /dumplings/:name", () => {
-  //   it("should retrieve dumpling with requested name", async () => {
-  //     const eDumpling = { name: "xxx" };
-  //     const { body } = await request(app).get("/dumplings/xxx").expect(200);
-  //     expect(body).toEqual("");
-  //   });
-  // });
+  describe("GET /dumplings/:name", () => {
+    it("should retrieve dumpling with requested name", async () => {
+      const { body } = await request(app).get("/dumplings/Prawn").expect(200);
+      expect(body.name).toEqual("Prawn");
+    });
+  });
 
   // describe("POST /dumplings", () => {
   //   it("should respond with the newly added dumpling", async () => {
