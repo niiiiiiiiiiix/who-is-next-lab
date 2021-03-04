@@ -51,7 +51,7 @@ describe("dumplings", () => {
   });
 
   describe("POST /dumplings", () => {
-    it("should respond with the newly added dumpling", async () => {
+    it("should respond with the newly added dumpling if fields are valid and authorised", async () => {
       const newDumpling = { name: "Fish" };
       const response = await request(app)
         .post("/dumplings")
@@ -60,7 +60,15 @@ describe("dumplings", () => {
       expect(response.status).toBe(201);
       expect(response.body).toMatchObject(newDumpling);
     });
-    it("should throw error if name is too short", async () => {
+    it("should throw error if authorised but name is empty", async () => {
+      const response = await request(app)
+        .post("/dumplings")
+        .send({ name: "" })
+        .set("Cookie", `token=${token}`);
+      expect(response.status).toBe(400);
+    });
+
+    it("should throw error if authorised but name is too short", async () => {
       const response = await request(app)
         .post("/dumplings/")
         .send({ name: "AB" })
@@ -86,7 +94,7 @@ describe("dumplings", () => {
       expect(response.body).toMatchObject({ name: "Tiger Prawn" });
     });
 
-    it("should throw error if name is empty", async () => {
+    it("should throw error if authorised but name is empty", async () => {
       const dumpling = await Dumpling.findOne({ name: "Prawn" });
       const response = await request(app)
         .put(`/dumplings/${dumpling.id}`)
