@@ -4,21 +4,24 @@ const bcrypt = require("bcryptjs");
 const dbHandlers = require("../test/dbHandler");
 
 describe("users", () => {
-  beforeAll(async () => {
-    await dbHandlers.connect();
-  });
+  beforeAll(async () => await dbHandlers.connect());
   afterEach(async () => await dbHandlers.clearDatabase());
   afterAll(async () => await dbHandlers.closeDatabase());
 
   describe("POST /dumplings/users", () => {
     it("should create one new user", async () => {
       const user = { username: "admin123", password: "admin123" };
-      const { body } = await request(app)
+      const response = await request(app)
         .post("/dumplings/users")
         .send(user)
         .expect(201);
-      expect(body).toMatchObject(user);
-      expect(await bcrypt.compare(user.password, body.password)).toEqual(true);
+      // console.log(response.body);
+      // console.log(user.password);
+      // https://www.npmjs.com/package/bcrypt
+      expect(response.body.username).toEqual(user.username);
+      expect(
+        await bcrypt.compare(user.password, response.body.password)
+      ).toEqual(true);
     });
   });
 });
