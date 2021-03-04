@@ -117,5 +117,11 @@ describe("dumplings", () => {
         .set("Cookie", `token=${token}`);
       expect(response.status).toBe(400);
     });
+
+    it("should throw error if unauthorised", async () => {
+      const dumpling = await Dumpling.findOne({ name: "Pork" });
+      const response = await request(app).delete(`/dumplings/${dumpling.id}`);
+      expect(response.status).toBe(401);
+    });
   });
 });
