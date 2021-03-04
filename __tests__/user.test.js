@@ -13,7 +13,7 @@ describe("users", () => {
 
   describe("POST /users", () => {
     it("should create one new user", async () => {
-      const user = { username: "admin123", password: "admin123" };
+      const user = { username: "admin001", password: "admin001" };
       const response = await request(app).post("/users").send(user);
       // console.log(response.body);
       // console.log(user.password);
@@ -25,17 +25,22 @@ describe("users", () => {
       ).toEqual(true);
     });
     it("should not allow a duplicate username to be created", async () => {
-      const user = { username: "admin123", password: "admin123" };
+      const user = { username: "admin001", password: "admin001" };
       const response = await request(app).post("/users").send(user);
       expect(response.status).toEqual(406);
     });
     it("should not allow a username with special characters", async () => {
-      const user = { username: "admin123!", password: "admin123" };
+      const user = { username: "admin00!", password: "admin002" };
       const response = await request(app).post("/users").send(user);
       expect(response.status).toEqual(406);
     });
     it("should not allow a username under 8 characters", async () => {
-      const user = { username: "admin1", password: "admin123" };
+      const user = { username: "admin03", password: "admin003" };
+      const response = await request(app).post("/users").send(user);
+      expect(response.status).toEqual(406);
+    });
+    it("should not allow a password under 8 characters", async () => {
+      const user = { username: "admin004", password: "admin04" };
       const response = await request(app).post("/users").send(user);
       expect(response.status).toEqual(406);
     });
