@@ -1,6 +1,11 @@
+require("dotenv").config();
+
 const express = require("express");
 const app = express();
 app.use(express.json());
+
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
 
 // win = who-is-next
 const win = {
@@ -20,6 +25,9 @@ app.get("/", (req, res) => {
 
 const dumplingsRouter = require("./routes/dumplings.routes");
 app.use("/dumplings", dumplingsRouter);
+
+const usersRouter = require("./routes/users.routes");
+app.use("/dumplings/users", usersRouter);
 
 app.use((err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
