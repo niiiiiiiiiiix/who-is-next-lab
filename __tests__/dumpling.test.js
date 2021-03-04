@@ -60,6 +60,11 @@ describe("dumplings", () => {
       expect(response.status).toBe(201);
       expect(response.body).toMatchObject(newDumpling);
     });
+    it("should throw error if unauthorised", async () => {
+      const newDumpling = { name: "Snail" };
+      const response = await request(app).post("/dumplings/").send(newDumpling);
+      expect(response.status).toBe(401);
+    });
   });
 
   describe("PUT /dumplings/:id", () => {
