@@ -90,6 +90,14 @@ describe("dumplings", () => {
         .set("Cookie", `token=${token}`);
       expect(response.status).toBe(400);
     });
+
+    it("should throw error if unauthorised", async () => {
+      const dumpling = await Dumpling.findOne({ name: "Prawn" });
+      const response = await request(app)
+        .put(`/dumplings/${dumpling.id}`)
+        .send({ name: "Tiger Prawn" });
+      expect(response.status).toBe(401);
+    });
   });
 
   describe("DELETE /dumplings/:id", () => {
