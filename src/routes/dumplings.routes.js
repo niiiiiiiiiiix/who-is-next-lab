@@ -21,7 +21,7 @@ router.get("/:name", async (req, res, next) => {
   res.status(200).json(dumplings);
 });
 
-router.post("/", protectRoute, async (req, res, next) => {
+router.post("/", [requireName, protectRoute], async (req, res, next) => {
   try {
     const dumplings = await ctrl.createOneDumpling(req.body, next);
     res.status(201).json(dumplings);

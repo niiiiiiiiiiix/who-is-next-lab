@@ -60,6 +60,14 @@ describe("dumplings", () => {
       expect(response.status).toBe(201);
       expect(response.body).toMatchObject(newDumpling);
     });
+    it("should throw error if name is too short", async () => {
+      const response = await request(app)
+        .post("/dumplings/")
+        .send({ name: "AB" })
+        .set("Cookie", `token=${token}`);
+      console.log(response.status);
+      expect(response.status).toBe(406);
+    });
     it("should throw error if unauthorised", async () => {
       const newDumpling = { name: "Snail" };
       const response = await request(app).post("/dumplings/").send(newDumpling);
