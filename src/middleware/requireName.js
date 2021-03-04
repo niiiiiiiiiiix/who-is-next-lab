@@ -5,7 +5,7 @@ const requireName = (req, res, next) => {
     next(err);
   } else if (req.body.name.length < 3) {
     const err = new Error("Name needs to be longer than 3");
-    err.statusCode = 406;
+    err.statusCode = 400;
     next(err);
   } else {
     next();

@@ -74,7 +74,7 @@ describe("dumplings", () => {
         .send({ name: "AB" })
         .set("Cookie", `token=${token}`);
       console.log(response.status);
-      expect(response.status).toBe(406);
+      expect(response.status).toBe(400);
     });
     it("should throw error if request body is not json ", async () => {
       const response = await request(app)
@@ -116,10 +116,10 @@ describe("dumplings", () => {
         .put(`/dumplings/${dumpling.id}`)
         .send({ name: "AB" })
         .set("Cookie", `token=${token}`);
-      expect(response.status).toBe(406);
+      expect(response.status).toBe(400);
     });
 
-    it("should throw an error if dumpling does not exist", async () => {
+    it("should throw an error if authorised but dumpling does not exist", async () => {
       const response = await request(app)
         .put(`/dumplings/603f572adeadad44d8ea23b0`)
         .send({ name: "Cheese" })
@@ -127,7 +127,7 @@ describe("dumplings", () => {
       expect(response.status).toBe(400);
     });
 
-    it("should throw error if request body is not json ", async () => {
+    it("should throw error if authorised but request body is not json ", async () => {
       const dumpling = await Dumpling.findOne({ name: "Prawn" });
       const response = await request(app)
         .put(`/dumplings/${dumpling.id}`)
@@ -155,7 +155,7 @@ describe("dumplings", () => {
       expect(response.body).toMatchObject({ name: "Prawn" });
     });
 
-    it("should throw an error if dumpling does not exist", async () => {
+    it("should throw an error if authorised but dumpling does not exist", async () => {
       // const dumpling = await Dumpling.findOne({ name: "notDumpling" }); // returns null
       const response = await request(app)
         .delete(`/dumplings/603f572adeadad44d8ea23b0`)
