@@ -12,6 +12,7 @@ router.post("/", async (req, res, next) => {
     res.status(201).send(newUser);
   } catch (err) {
     err.statusCode = 409;
+    err.message = "Invalid username, please try again!";
     next(err);
   }
 });

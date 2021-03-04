@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema({
     unique: true,
     minlength: 8,
     lowercase: true,
+    match: /^[a-zA-Z0-9]*$/,
   },
   password: {
     type: String,
@@ -16,13 +17,13 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-userSchema.virtual("fullName").get(function () {
-  return `${this.salutation} ${this.firstName} ${this.lastName}`;
-});
+// userSchema.virtual("fullName").get(function () {
+//   return `${this.salutation} ${this.firstName} ${this.lastName}`;
+// });
 
-userSchema.virtual("reverseName").get(function () {
-  return `${this.lastName}, ${this.firstName}`;
-});
+// userSchema.virtual("reverseName").get(function () {
+//   return `${this.lastName}, ${this.firstName}`;
+// });
 
 userSchema.pre("save", async function () {
   if (this.isModified("password")) {
