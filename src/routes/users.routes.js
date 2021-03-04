@@ -11,7 +11,7 @@ router.post("/", async (req, res, next) => {
     const newUser = await user.save();
     res.status(201).send(newUser);
   } catch (err) {
-    err.statusCode = 409;
+    err.statusCode = 406;
     err.message = "Invalid username, please try again!";
     next(err);
   }

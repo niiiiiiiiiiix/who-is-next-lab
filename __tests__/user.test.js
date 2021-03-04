@@ -27,17 +27,17 @@ describe("users", () => {
     it("should not allow a duplicate username to be created", async () => {
       const user = { username: "admin123", password: "admin123" };
       const response = await request(app).post("/users").send(user);
-      expect(response.status).toEqual(409);
+      expect(response.status).toEqual(406);
     });
     it("should not allow a username with special characters", async () => {
       const user = { username: "admin123!", password: "admin123" };
       const response = await request(app).post("/users").send(user);
-      expect(response.status).toEqual(409);
+      expect(response.status).toEqual(406);
     });
     it("should not allow a username under 8 characters", async () => {
       const user = { username: "admin1", password: "admin123" };
       const response = await request(app).post("/users").send(user);
-      expect(response.status).toEqual(409);
+      expect(response.status).toEqual(406);
     });
   });
 });
