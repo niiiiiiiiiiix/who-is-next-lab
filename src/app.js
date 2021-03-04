@@ -27,7 +27,7 @@ const dumplingsRouter = require("./routes/dumplings.routes");
 app.use("/dumplings", dumplingsRouter);
 
 const usersRouter = require("./routes/users.routes");
-app.use("/dumplings/users", usersRouter);
+app.use("/users", usersRouter);
 
 app.use((err, req, res, next) => {
   err.statusCode = err.statusCode || 500;

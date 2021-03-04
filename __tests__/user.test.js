@@ -11,10 +11,7 @@ describe("users", () => {
   describe("POST /dumplings/users", () => {
     it("should create one new user", async () => {
       const user = { username: "admin123", password: "admin123" };
-      const response = await request(app)
-        .post("/dumplings/users")
-        .send(user)
-        .expect(201);
+      const response = await request(app).post("/users").send(user).expect(201);
       // console.log(response.body);
       // console.log(user.password);
       // https://www.npmjs.com/package/bcrypt
