@@ -96,6 +96,14 @@ describe("dumplings", () => {
       expect(response.status).toBe(406);
     });
 
+    it("should throw an error if dumpling does not exist", async () => {
+      const response = await request(app)
+        .put(`/dumplings/603f572adeadad44d8ea23b0`)
+        .send({ name: "Cheese" })
+        .set("Cookie", `token=${token}`);
+      expect(response.status).toBe(400);
+    });
+
     it("should throw error if request body is not json ", async () => {
       const dumpling = await Dumpling.findOne({ name: "Prawn" });
       const response = await request(app)

@@ -36,7 +36,13 @@ router.put(
   async (req, res, next) => {
     try {
       const dumpling = await ctrl.updateById(req.params.id, req.body, next);
-      res.status(200).json(dumpling);
+      if (dumpling === null) {
+        const error = new Error("Dumpling does not exist");
+        error.statusCode = 400;
+        next(error);
+      } else {
+        res.status(200).json(dumpling);
+      }
     } catch (error) {
       next(error);
     }
