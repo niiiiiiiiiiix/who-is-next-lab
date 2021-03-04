@@ -39,6 +39,7 @@ describe("dumplings", () => {
       const { body } = await request(app)
         .get("/dumplings/presenter")
         .expect(200);
+      console.log(Object.keys(body));
       expect(Object.keys(body).length).toEqual(3);
     });
   });
